@@ -1,0 +1,42 @@
+{
+  "engine": "harmonize.py",
+  "dna": "design-dna.json",
+  "parameters": {
+    "upem": 2000,
+    "cjk_vertical_units": 166.0,
+    "cjk_horizontal_units": 58.0,
+    "target_horizontal_units": 79.12,
+    "edge_delta_units": 0.0,
+    "serif_head_units": 99.48,
+    "serif_extension_units": 0.0,
+    "bracket_frac": 0.14,
+    "shear": 0.034995,
+    "adaptation": 0.45,
+    "horiz_slope": 0.3,
+    "corner_cos": 0.62,
+    "min_vertical_normal": 0.3,
+    "max_terminals": 6,
+    "max_terminals_per_contour": 2,
+    "x_extremum_eps": 2.0,
+    "max_points": 400,
+    "hard_max_points": 1400
+  },
+  "glyphs_total": 31004,
+  "glyphs_full": 30925,
+  "glyphs_partial": 0,
+  "glyphs_passthrough": 2,
+  "glyphs_no_terminal": 77,
+  "terminals_total": 221484,
+  "edge_points_total": 1227329,
+  "points_before": 5200541,
+  "points_after": 5643509,
+  "reasons": {
+    "inner_contour": 72001,
+    "no_terminal_found": 7376,
+    "too_few_points": 3
+  },
+  "failures": [],
+  "terminals_per_glyph": 7.144,
+  "point_growth_pct": 8.52,
+  "full_coverage_pct": 99.75
+}

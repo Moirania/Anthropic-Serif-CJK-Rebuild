@@ -56,6 +56,11 @@ legal status.
 
     All outlines that the build appends are derived from two OFL sources:
 
+      The signature preset uses this family's Regular weight rather
+      than Medium and redraws its CJK terminals from measured Latin
+      design parameters. It is the same work and the same licence, not
+      a new source. See docs/DESIGN.md.
+
       i.  Noto Serif CJK SC (Source Han Serif), copyright (c) 2014-2022
           Adobe (http://www.adobe.com/) and other contributors. Supplies
           Chinese ideographs, kana, Hangul, enclosed and squared CJK

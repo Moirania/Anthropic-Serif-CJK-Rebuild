@@ -43,7 +43,7 @@ inputs/
 spread across directories, skip `--source-dir` and pass `--cjk-ttc` and
 `--lgc-font` as absolute paths.
 
-## Four presets
+## Five presets
 
 ```bash
 # 1.0.0 equivalent: Chinese only, Medium
@@ -71,6 +71,14 @@ python3 scripts/build_cjk.py \
   --source-dir /usr/share/fonts/opentype/noto \
   --lgc-font "/path/to/NotoSerif[wdth,wght].ttf" \
   --preset full
+
+# Redraw Chinese terminals from the measured Latin design grammar
+# Requires assets/design-dna.json (run scripts/measure_dna.py first)
+python3 scripts/measure_dna.py --latin inputs/AnthropicSerifWebText.ttf
+python3 scripts/build_cjk.py \
+  --latin inputs/AnthropicSerifWebText.ttf \
+  --source-dir /usr/share/fonts/opentype/noto \
+  --preset signature
 ```
 
 Each preset sets the CJK weight, whether the LGC source is used, whether
@@ -100,6 +108,9 @@ another 90 seconds.
 | `--no-cjk` | off | Skip the CJK source |
 | `--no-lgc` | preset decides | Skip the LGC source |
 | `--full` | preset decides | Take every remaining CJK source code point |
+| `--harmonize` | off | Redraw CJK terminals from the Latin design grammar |
+| `--dna` | `assets/design-dna.json` | Measured design DNA from `measure_dna.py` |
+| `--harmony-report` | `assets/harmony-report.json` | Consistency report for the redraw |
 | `--limit` | 0 | Convert a small sample, for debugging |
 
 To smoke-test without a full build:
@@ -192,11 +203,11 @@ expectations:
 
 | Preset | Glyphs | Code points | Non-BMP | Highest |
 | --- | --- | --- | --- | --- |
-| `cjk`, `cjk-bold` | 31,724 | 31,595 | 2,306 | U+3106C |
+| `cjk`, `cjk-bold`, `signature` | 31,724 | 31,595 | 2,306 | U+3106C |
 | `multilingual` | 33,897 | 33,768 | 2,394 | U+3106C |
 | `full` | 47,092 | 46,963 | 2,619 | U+3106C |
 
-All four retain 19 GSUB features, 2 GPOS features and four cmap subtables
+All five builds retain 19 GSUB features, 2 GPOS features and four cmap subtables
 including format 12. Render
 `A 文 あ 한 α Ж Typography 排版設計 かな 한글 Ελληνικά Кириллица ﬁ 123`
 with the `full` build and confirm that `fi` still forms a ligature and no
@@ -238,6 +249,13 @@ does not change outlines or the licence status of the Western glyphs.
   supplied precomposed.
 - The `full` build is about 23.6 MB as TTF and 8.4 MB as WOFF2. Subset
   for the web; see [USAGE.md](USAGE.md).
+- `signature` is a parameterised redraw, not a hand-drawn L3 face. It uses
+  the Regular CJK source (stroke contrast 2.273 versus Latin 2.098), adds
+  221,484 bracketed flat serif terminals and a 5-degree stress shear.
+  Triangular wedge slopes remain on dense glyphs, and the contrast does not
+  reach 2.098 exactly. Contour-level emboldening was prototyped and removed
+  because it twists long horizontal edges into self-intersecting slants and
+  makes FreeType overflow at >=800 px. See [DESIGN.md](DESIGN.md).
 - `cjk-bold` is heavier only in Chinese. Applying CSS `font-weight: 700`
   on top of it would synthetically embolden the Latin and is not
   recommended.

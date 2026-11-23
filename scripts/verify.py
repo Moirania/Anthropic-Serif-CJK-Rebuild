@@ -12,6 +12,7 @@ EXPECTED = {
     "cjk-bold":     (31724, 31595),
     "multilingual": (33897, 33768),
     "full":         (47092, 46963),
+    "signature":    (31724, 31595),
 }
 
 SAMPLES = {
