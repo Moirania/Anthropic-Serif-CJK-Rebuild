@@ -1,0 +1,30 @@
+# SOURCE-MANIFEST for Anthropic Serif CJK Rebuild
+#
+# SHA-256 checksums for every tracked file. This repository contains NO
+# font binaries. Verify the source tree locally with:
+#
+#     sha256sum -c SOURCE-MANIFEST.txt
+#
+# The manifest itself is not listed. Lines beginning with # are comments.
+#
+dcc444b6a74be9c95d127b86b625e7c420a2435bf479ccea0d3d65ed31990edb  .gitignore
+21733f560b060a8b6b7bfff84a52249c01cddfc283cd56389d0824f676d4b0c5  CITATION.cff
+8854811fdcaaf5991cf15e3b9801f5d80dc2917b24dae38e213c6003fe20ac7c  CODE_OF_CONDUCT.md
+4c4099dcb2f95162eef06c7652f2034ff92f99c5ec0e5e590378a76781145748  CONTRIBUTING.md
+b8d10ccbc3d0c2bd375d6f7aa77f561eb4887c3936dee7ca716ce7e050dfb99c  FONTLOG.txt
+3fe04009aa2f5240ef436b0aa7cc2c761550662280e5aedb464e253ef35d2d72  LICENSE
+2248be72b4da3521046811d0131f0a4b22631299a70c5c5199f1c0b249975910  OFL.txt
+7efeca3a2c7d24d843ecff792cde850c6ad6c3ca166116baf4f96e86d94155a1  README.md
+5c88cf109a2d0e581e1a8d47c56f3234b5c6891ae037be1a569fcc48804d5951  assets/before-after.png
+883ed755c4ddc0a527f4abd1afcda6ee73b66dec00560672302a5554ec05b533  assets/cjk-weight-comparison.png
+45a011a8d23bf5b529db6d5269e1668663636ae8914a1df8971fbd1af36796b6  assets/hangul-preview.png
+d338a4e46f98d81f20e0fc5544048a63fc65b83e0b2630f88d87bfba042df047  assets/kana-preview.png
+4e0910f973e2099bbbb95c906fdbed07e6aa6890e2094d2f189cb5461862f4ff  assets/multilingual-specimen.png
+cac966b995c2ef604851aefd967976d2aea61553d71391cd2508532e7593513d  assets/type-specimen-sheet.png
+ca607421132a3827edd8133bf9563360682fb4b04f5c0b4aa2d815313d01251a  docs/BUILD.md
+834d0bfa541950fd1ec4345758b73d311f37b14be87fd67ae471414ffc63ee67  docs/CHARACTER-SET.md
+00859d8b562bcd122a1f5f472253f4c7876e2d833c8e4345ce5f1fba1e4d68e8  docs/COMPLIANCE.md
+f01c3ac6548b6867bb257fe95b03b44559b381c6fdba7f391c3e82b83852db74  docs/USAGE.md
+e06708c30c24770d213094bfa6076ba73c4e5382e7e5e36b2c35eb48cddedbab  scripts/build_cjk.py
+df9086cb2ba7f2a1fdfc9155dc00bcffada5d2f48ef292dae5523f4375eaaa07  scripts/make_woff2.py
+b232fdbf4a4a04660db4f6d8e7530f2ba111837f5db5f0d49880f09111392740  scripts/verify.py

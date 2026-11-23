@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this build method, cite it as below and state which preset you used."
+title: "Anthropic Serif CJK Rebuild"
+abstract: "A source-only, reproducible rebuild of a multilingual serif font. The repository ships no font binaries: the reader supplies a legally obtained proprietary Latin base plus two SIL OFL sources and runs scripts/build_cjk.py locally. Four presets produce cjk (31,724 glyphs), cjk-bold (same coverage, heavier Chinese), multilingual (33,897 glyphs, adds Latin Extended, Greek and Cyrillic) and full (47,092 glyphs / 46,963 code points, adds kana, Hangul and CJK symbols). The output is renamed to Serif CJK Extension by default and preserves all upstream Latin outlines, 19 GSUB features and 2 GPOS features. Repository material is MIT; generated added outlines are SIL OFL 1.1; the upstream Latin outlines are proprietary and not supplied. See LICENSE."
+authors:
+  - family-names: "Lin"
+    given-names: "Yingxue"
+    alias: "Moirania"
+type: software
+license:
+  - "MIT"
+  - "OFL-1.1"
+  - "LicenseRef-Proprietary-Upstream-Byo"
+repository-code: "https://github.com/Moirania/Anthropic-Serif-CJK-Rebuild"
+keywords:
+  - fonts
+  - typography
+  - reproducible-build
+  - fonttools
+  - cjk
+  - chinese-fonts
+  - japanese
+  - kana
+  - hangul
+  - korean
+  - greek
+  - cyrillic
+  - sil-ofl
+  - opentype
+  - unicode
+version: "1.0.0"
+date-released: "2026-11-19"

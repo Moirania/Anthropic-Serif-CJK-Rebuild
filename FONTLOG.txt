@@ -1,0 +1,135 @@
+FONTLOG for Anthropic Serif CJK Rebuild
+=======================================
+
+This file records the changes made to the font software, following the
+convention recommended by the SIL Open Font License FAQ for modified
+fonts. It is part of the source package together with OFL.txt.
+
+This repository contains NO font binaries. The records below describe the
+font that the scripts generate locally from the reader's own inputs.
+
+
+Version history
+---------------
+
+  1.000  2026-11-19  Rebuild edition. A fresh, source-only publication of
+                      the same extension method, with four build presets
+                      (cjk, cjk-bold, multilingual, full), a neutral
+                      default family name, local verification tooling and
+                      no committed font files.
+
+
+Original material
+-----------------
+
+1. Latin outlines, OpenType layout tables, vertical metrics:
+   Anthropic Serif Web Text Regular, proprietary to Anthropic, PBC.
+   720 glyphs, 628 code points, 2000 units per em, 19 GSUB features and
+   2 GPOS features. NOT supplied by this repository and NOT relicensed.
+
+2. CJK, kana, Hangul and CJK-symbol outlines:
+   Noto Serif CJK SC (Source Han Serif), copyright (c) 2014-2022 Adobe
+   and other contributors, SIL Open Font License 1.1. SC face index 2 of
+   the seven-weight TTC collection. All five regional faces were checked
+   and have identical cmap coverage, so face 2 is used throughout.
+
+3. Latin Extended, Greek and Cyrillic outlines:
+   Noto Serif (latin-greek-cyrillic), Copyright 2022 The Noto Project
+   Authors, SIL Open Font License 1.1. Variable font instanced at
+   wght=500 with wdth at its default.
+
+No third outline source is introduced. The cjk-bold preset is not a new
+source; it uses the Bold weight of the same Noto Serif CJK SC family.
+
+
+Modifications
+-------------
+
+- Appended rather than inserted every new glyph. All 720 original glyph
+  ids, advances, side bearings and four original cmap subtables remain
+  valid, so all 19 GSUB and 2 GPOS lookups continue to work unchanged.
+
+- Converted CFF cubic charstrings to TrueType quadratic outlines with
+  fontTools Cu2QuPen (max_err=0.5, reverse_direction=True) and scaled
+  coordinates by 2 from 1000 to 2000 UPM.
+
+- Instantiated the Noto Serif variable font at wght=500, decomposed
+  composite glyphs with DecomposingRecordingPen, scaled coordinates by 2
+  and rebuilt each glyph with TTGlyphPen. Glyph names are prefixed to
+  avoid collisions (uniXXXX / uXXXXX for CJK, lgcXXXX for LGC).
+
+- Set Chinese and kana advances to full-width 2000 units, Hangul
+  syllables to 1932 units, and LGC advances from the instanced source
+  scaled by 2. Original hhea ascent 1985, descent -515 and lineGap 0 are
+  untouched.
+
+- Built a fifth (3,10) format 12 cmap subtable carrying the complete
+  mapping, including non-BMP CJK Extensions B-I, Latin Extended-F/G and
+  the U+1F100 / U+1F200 enclosed supplements.
+
+- Recomputed maxp, hhea, head bounding box and OS/2 Unicode range fields.
+  Wrote Adobe, Noto Project Authors and maintainer copyright lines plus
+  the SIL OFL 1.1 reference into name IDs 0, 13 and 14.
+
+- Renamed the internal family to "Serif CJK Extension" by default,
+  rewriting name IDs 1, 4, 6, 16 and 17 and deriving the PostScript name
+  "SerifCJKExtension-Regular". This removes the upstream brand name from
+  the derivative. --keep-upstream-name reproduces the original naming.
+
+- Provided four presets with distinct version strings:
+    cjk           31,724 glyphs / 31,595 code points  (Version 1.000)
+    cjk-bold      31,724 glyphs / 31,595 code points  (Version 1.000 CJK Bold)
+    multilingual  33,897 glyphs / 33,768 code points  (Version 1.100)
+    full          47,092 glyphs / 46,963 code points  (Version 1.200)
+  The cjk and cjk-bold cmaps are identical; only outline instances
+  differ. Ink density on a sample paragraph rises 21,178 -> 28,082 px
+  (+32.6%) and the 中 stem 54.5 -> 70.7 px, while the Western H stem
+  stays 61.4 px.
+
+- Added scripts/verify.py to check structure and mandatory characters
+  without a reference binary, and scripts/make_woff2.py for local WOFF2
+  conversion.
+
+- Produced six specimen sheets in assets/ from locally built fonts:
+  before-after.png, cjk-weight-comparison.png, kana-preview.png,
+  hangul-preview.png, multilingual-specimen.png, type-specimen-sheet.png.
+  Print-specimen style: hard 1px rules, crop marks, left alignment,
+  generous margins, no rounded corners, no glass, no gradient buttons.
+
+
+Known limitations
+-----------------
+
+- Added outlines are matched by optical weight and metric alignment, not
+  redrawn stroke by stroke. Chinese, kana, Hangul and CJK symbols retain
+  Source Han Serif detail; Latin Extended, Greek and Cyrillic retain
+  Noto Serif detail. They share a design language but are not identical
+  to the upstream Latin letterforms.
+
+- CFF to TrueType conversion and composite decomposition discard native
+  hinting; very small screen sizes may appear slightly softer.
+
+- Original GSUB/GPOS lookups cover Latin only. Other scripts get correct
+  glyphs and advances but no Latin kerning pairs, kana positioning,
+  vertical layout or Hangul Jamo composition. Hangul syllables are
+  precomposed.
+
+- cjk-bold is heavier only in Chinese and keeps OS/2.usWeightClass 400
+  and subfamily Regular. It is not a synthetic bold face; applying CSS
+  font-weight: 700 on top would embolden the Latin undesirably.
+
+- All four presets share the same family and subfamily names. Install
+  only one; cjk and cjk-bold are indistinguishable to a font cache.
+
+- Colour emoji and pictographs are not included. The U+1F200 block
+  contributes monochrome enclosed CJK ideographs only.
+
+
+License of the changes
+----------------------
+
+All added outlines and their derivatives are distributed under the SIL
+Open Font License, Version 1.1 (see OFL.txt). Repository documentation,
+scripts and specimen images are under the MIT terms in LICENSE. The
+upstream Latin outlines remain proprietary, are not supplied by this
+repository and are not relicensed. See LICENSE and docs/COMPLIANCE.md.
