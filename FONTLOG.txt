@@ -5,8 +5,10 @@ This file records the changes made to the font software, following the
 convention recommended by the SIL Open Font License FAQ for modified
 fonts. It is part of the source package together with OFL.txt.
 
-This repository contains NO font binaries. The records below describe the
-font that the scripts generate locally from the reader's own inputs.
+This repository contains exactly ONE font binary since 2026-11-24:
+fonts/SerifCJKExtension-Standard.ttf (the cjk production build). See
+section 1.500 below and docs/COMPLIANCE.md. All other records describe
+fonts the scripts generate locally from the reader's own inputs.
 
 
 Version history
@@ -90,7 +92,8 @@ Modifications
   without a reference binary, and scripts/make_woff2.py for local WOFF2
   conversion.
 
-- Produced seven specimen sheets in assets/ from locally built fonts:
+- Produced seven specimen sheets in assets/specimens/ from locally
+  built fonts (later reorganised; the directory now holds 13 sheets):
   before-after.png, cjk-weight-comparison.png, kana-preview.png,
   hangul-preview.png, multilingual-specimen.png, type-specimen-sheet.png, l3-comparison.png.
   Print-specimen style: hard 1px rules, crop marks, left alignment,
@@ -102,7 +105,7 @@ Version 1.400 L3 post-processing (optional, source only)
 
 - Withdrew the broken v1.300 signature preset in full: engine, DNA
   measurement, design log, specimen and release all removed.
-- Added scripts/l3_pipeline.py with four subcommands (fetch, build,
+- Added scripts/experimental/l3_pipeline.py with four subcommands (fetch, build,
   audit, merge). It uses external hanzi-writer stroke medians so that
   only genuine horizontal strokes are considered; pie, na, dian and
   folded strokes are gated out. No point is added or removed, no x
@@ -116,7 +119,7 @@ Version 1.400 L3 post-processing (optional, source only)
   zero residual defects after rollback. Merging the strongest passing
   variant per glyph yields 6624 changed glyphs, re-audited to zero
   defects, with all 720 Western outlines byte-identical.
-- Added docs/L3.md, assets/l3-comparison.png and assets/l3-report.json.
+- Added docs/L3.md, assets/specimens/l3-comparison.png and assets/reports/l3-report.json.
   The stroke index (9565 characters, 30.27% of the cjk build) is
   downloaded at run time and is not committed.
 - Known trade-off: the visual change is deliberately mild (mean ink
@@ -146,8 +149,32 @@ Version 1.401 four-point normative audit
   centre down.
 - Consequence: cjk (the untouched Source Han Serif Medium build) is
   the recommended production version. l3_pipeline.py is retained as
-  an experimental tool only. Added assets/norm-report.json and
+  an experimental tool only. Added assets/reports/norm-report.json and
   updated docs/L3.md and README.md accordingly.
+
+Version 1.500 repository reorganisation and production TTF
+-----------------------------------------------------------
+
+- 2026-11-24. At the maintainer's request, shipped exactly one font
+  binary: fonts/SerifCJKExtension-Standard.ttf, the untouched cjk
+  production build chosen by the four-point normative audit. It is
+  listed in SOURCE-MANIFEST.txt and is the sole exception to
+  .gitignore. Its proprietary upstream outlines make its public
+  redistribution status unresolved; see docs/COMPLIANCE.md.
+- Reorganised assets/ into specimens/ (13 sheets) and reports/ (two
+  JSON audits); moved the experimental L3 pipeline to
+  scripts/experimental/l3_pipeline.py; kept verify_norm.py in
+  scripts/ as the formal acceptance gate.
+- Added six REV.3 specimen sheets for the standard build: complete
+  1600x4224 PNG, 800x2112 mobile JPG, a dedicated dark-ground 10/12
+  px enlargement, and three full-width section crops. REV.3 adds the
+  build date, true 10/12 px optical sizes, 1.45x leading, 400 px
+  counter and terminal callouts, a reversed block, and removes every
+  hairline from the Qianziwen table (verified by pixel self-check).
+- Updated README.md, docs/COMPLIANCE.md, LICENSE, CONTRIBUTING.md,
+  CITATION.cff, docs/L3.md, .gitignore and SOURCE-MANIFEST.txt to
+  describe the real scope. Releases: v1.4.0-l3 is marked experimental;
+  v1.4.1-norm-audit remains the latest production statement.
 
 Known limitations
 -----------------

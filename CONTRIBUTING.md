@@ -4,14 +4,17 @@ Thanks for taking the time to improve this project.
 
 ## The one rule
 
-**Never commit a font binary, an upstream font file, or a credential.**
+**Never add, replace or attach a font binary, an upstream font file, or a
+credential.**
 
-This repository exists specifically because it ships no font software.
-`.gitignore` excludes every common font extension plus `inputs/`,
-`build/` and `dist/`. If a pull request adds a `.ttf`, `.otf`, `.woff2`,
-`.ttc` or the upstream Latin font, it cannot be merged. Do not attach
-binaries to issues either; describe the problem with code points and
-screenshots instead.
+The repository ships exactly one exception: `fonts/SerifCJKExtension-Standard.ttf`,
+committed at the maintainer's explicit request on 2026-11-24. That file is
+frozen for ordinary contributions and its redistribution status is
+described in docs/COMPLIANCE.md. `.gitignore` excludes every other common
+font extension plus `inputs/`, `build/` and `dist/`. A pull request that
+adds another `.ttf`, `.otf`, `.woff2`, `.ttc` or the upstream Latin font
+cannot be merged. Do not attach binaries to issues either; describe the
+problem with code points and screenshots instead.
 
 ## Before you start
 
@@ -33,7 +36,8 @@ licence. Without that information a pull request cannot be merged.
   print-specimen style: hard rules, crop marks, left alignment, no
   rounded corners, no glass, no gradient buttons.
 - Add a subsetting recipe to [docs/USAGE.md](docs/USAGE.md).
-- Improve the L3 stroke gate or audit rules; read [docs/L3.md](docs/L3.md)
+- Improve the L3 stroke gate or audit rules in
+  `scripts/experimental/l3_pipeline.py`; read [docs/L3.md](docs/L3.md)
   first and state which glyphs you proofed.
 - Propose a new preset, with its source font, licence and expected counts.
 
@@ -57,8 +61,9 @@ licence. Without that information a pull request cannot be merged.
    the real output: preset counts, file sizes, command examples.
 5. Regenerate `SOURCE-MANIFEST.txt` if you added, removed or edited any
    tracked file.
-6. Confirm there is no emoji, no token, no absolute local path and no
-   font binary in the diff.
+6. Confirm there is no emoji, no token, no absolute local path, and no
+   NEW font binary in the diff (the one shipped TTF is the only
+   exception).
 7. Open a pull request describing what changed and how you verified it.
 
 ## Reporting problems

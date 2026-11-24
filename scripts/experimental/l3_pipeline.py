@@ -10,16 +10,16 @@ are never committed to this repository.
 
 Pipeline (run from the repository root)::
 
-    python3 scripts/l3_pipeline.py fetch
-    python3 scripts/l3_pipeline.py build --tag p45 --pull 0.45
-    python3 scripts/l3_pipeline.py build --tag p55 --pull 0.55
-    python3 scripts/l3_pipeline.py build --tag p65 --pull 0.65
-    python3 scripts/l3_pipeline.py build --tag p80 --pull 0.80
-    python3 scripts/l3_pipeline.py audit --tag p45
-    python3 scripts/l3_pipeline.py audit --tag p55
-    python3 scripts/l3_pipeline.py audit --tag p65
-    python3 scripts/l3_pipeline.py audit --tag p80
-    python3 scripts/l3_pipeline.py merge --tags p80,p65,p55,p45
+    python3 scripts/experimental/l3_pipeline.py fetch
+    python3 scripts/experimental/l3_pipeline.py build --tag p45 --pull 0.45
+    python3 scripts/experimental/l3_pipeline.py build --tag p55 --pull 0.55
+    python3 scripts/experimental/l3_pipeline.py build --tag p65 --pull 0.65
+    python3 scripts/experimental/l3_pipeline.py build --tag p80 --pull 0.80
+    python3 scripts/experimental/l3_pipeline.py audit --tag p45
+    python3 scripts/experimental/l3_pipeline.py audit --tag p55
+    python3 scripts/experimental/l3_pipeline.py audit --tag p65
+    python3 scripts/experimental/l3_pipeline.py audit --tag p80
+    python3 scripts/experimental/l3_pipeline.py merge --tags p80,p65,p55,p45
 
 Third-party data: hanzi-writer-data (Make Me A Hanzi stroke medians).
 Its licence is NOT re-asserted here; `fetch` downloads it at run time and
@@ -49,7 +49,7 @@ from scipy import ndimage
 from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._g_l_y_f import GlyphCoordinates
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, "data")
 BUILD = os.path.join(ROOT, "build")
 IDX = os.path.join(DATA, "strokes.json")

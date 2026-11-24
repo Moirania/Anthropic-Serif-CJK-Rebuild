@@ -1,27 +1,22 @@
 # Anthropic Serif CJK Rebuild
 
-[![Binaries](https://img.shields.io/badge/Font%20binaries-not%20included-A62E26)](docs/COMPLIANCE.md) [![Presets](https://img.shields.io/badge/Build%20presets-4-222118)](docs/BUILD.md) [![Max glyphs](https://img.shields.io/badge/Max%20glyphs-47092-222118)](docs/CHARACTER-SET.md) [![UPM](https://img.shields.io/badge/UPM-2000-222118)](docs/BUILD.md) [![Outlines](https://img.shields.io/badge/Outlines-SIL%20OFL%201.1-222118)](OFL.txt) [![Upstream](https://img.shields.io/badge/Upstream-BYOSF-746F64)](docs/COMPLIANCE.md)
+[![Binaries](https://img.shields.io/badge/Font%20binaries-1%20standard%20TTF-A62E26)](docs/COMPLIANCE.md) [![Updated](https://img.shields.io/badge/Updated-2026--11--24-222118)](FONTLOG.txt) [![Presets](https://img.shields.io/badge/Build%20presets-4-222118)](docs/BUILD.md) [![Max glyphs](https://img.shields.io/badge/Max%20glyphs-47092-222118)](docs/CHARACTER-SET.md) [![UPM](https://img.shields.io/badge/UPM-2000-222118)](docs/BUILD.md) [![Outlines](https://img.shields.io/badge/Outlines-SIL%20OFL%201.1-222118)](OFL.txt) [![Upstream](https://img.shields.io/badge/Upstream-BYOSF-746F64)](docs/COMPLIANCE.md)
 
-从源码**重新制作**一套多文种衬线字体的完整工程。仓库里**没有任何字体文件**：你自备一份合法取得的上游西文字体，再准备两个开源字族，运行脚本即可在本机生成成品。
+从源码**重新制作**一套多文种衬线字体的完整工程，最近整理于 **2026-11-24**。主体仍是**方法、参数与可复现流程**：你自备一份合法取得的上游西文字体与两个 SIL OFL 字族，运行脚本即可在本机生成成品。构建出的字体默认使用全新的内部家族名 `Serif CJK Extension`，不含上游品牌字样。
 
-与直接分发字体二进制的仓库不同，这里交付的是**方法、参数与可复现流程**。构建出的字体默认使用全新的内部家族名 `Serif CJK Extension`，不含上游品牌字样，是一版独立命名的字体，而不是对既有文件的复制或改名分发。
+本轮按维护者要求，额外收录了**唯一一份**正式版字体 [`fonts/SerifCJKExtension-Standard.ttf`](fonts/SerifCJKExtension-Standard.ttf)，并补进 6 张 REV.3 校样预览图；其余产物仍全部留在本地。这一例外及其授权风险见下一节。
 
 ---
 
-## 先读这一节：为什么没有字体文件
+## 先读这一节：字体文件只有一份，为什么
 
-上游西文字体是 Anthropic, PBC 的专有品牌字体，官方未提供公开的字体授权。把它的完整轮廓打包进一个公开仓库再分发，权利状态并不清晰。因此本仓库采用保守发布路径：
+自 **2026-11-24** 起，本仓库按维护者决定收录**唯一一份**字体：[`fonts/SerifCJKExtension-Standard.ttf`](fonts/SerifCJKExtension-Standard.ttf)。它是 `cjk` 预设本地构建的**正式版**，31,724 字形 / 31,595 码位、2000 UPM，720 个西文轮廓与 19 个 GSUB / 2 个 GPOS 特性保持原样。四项规整度验收中，未改动的 `cjk` 原版被判定为正式版，实测与根因见 [docs/L3.md](docs/L3.md)。
 
-- 只提交构建脚本、文档、许可文本与样张图片；
-- `*.ttf`、`*.otf`、`*.woff2`、`*.ttc` 等字体二进制全部写进 [`.gitignore`](.gitignore)，不进版本库，也不作为 Release 附件；
-- 上游字体由你本人提供，放在本地 `inputs/` 目录，脚本只读取、不上传；
-- 生成的成品落在本地 `build/` 目录，同样被忽略。
+**必须说清的风险**：这份文件含有上游 Anthropic Serif Web Text Regular 的全部 720 个西文轮廓。该字体是 Anthropic, PBC 的专有品牌字体，官方未公开字体授权；把它放进公开仓库属于对专有轮廓的公开再分发，**权利状态不清晰**。改写 `name` 表只是命名措施，不是许可。本仓库不对这份文件给出任何授权结论，也不代表权利人授予许可；下载、镜像或商用前请自行核实上游权利。完整论证见 [docs/COMPLIANCE.md](docs/COMPLIANCE.md)。
 
-这样，全部方法、全部 OFL 衍生贡献与全部验证数据都是公开的，而专有轮廓不发生公开再分发。完整论证、OFL 义务清单与自查表见 [docs/COMPLIANCE.md](docs/COMPLIANCE.md)。
+**其余产物仍不收录**：`cjk-bold`、`multilingual`、`full`、WOFF2 转换结果、L3 实验产物以及上游字体本身，全部留在本地 `build/` 与 `inputs/`，由 [`.gitignore`](.gitignore) 排除。脚本**不读取也不依赖** `fonts/` 下的文件；若你希望完全不接触这份二进制，直接按「快速开始」用自备材料本地生成即可。
 
-如果你只是想下载现成文件，同一维护者另有一个包含预构建字体的仓库：
-[Anthropic-Serif-CJK-Extension](https://github.com/Moirania/Anthropic-Serif-CJK-Extension)。
-那个仓库的公开分发风险由其自身说明承担，使用前同样请自行核实授权。
+如果你只是想下载更多现成版本，同一维护者另有 [Anthropic-Serif-CJK-Extension](https://github.com/Moirania/Anthropic-Serif-CJK-Extension)。那个仓库的公开分发风险由其自身说明承担，使用前同样请自行核实授权。
 
 ---
 
@@ -121,33 +116,52 @@ body {
 
 ## 效果预览
 
-样张图片由本地构建产物渲染，随仓库公开，方便在动手前判断风格。沿用印刷校样的视觉语言：米白纸底、墨黑字、朱红只作标记、1px 硬线网格、四角裁切标记、左对齐、大留白，没有圆角玻璃拟态、渐变大按钮和三栏功能介绍。
+样张图片由本地构建产物渲染，随仓库公开，方便在动手前判断风格。沿用印刷校样的视觉语言：米白纸底、墨黑字、朱红只作标记、1px 硬线分隔、四角裁切标记、左对齐、大留白，没有圆角玻璃拟态、渐变大按钮和三栏功能介绍。共 **13 张样张**与 2 份报告。
 
 **补全前后**：同一段文字，原字体的中文显示为缺字方框。
 
-![补全前后同文对照](assets/before-after.png)
+![补全前后同文对照](assets/specimens/before-after.png)
 
 **中文字重对照**：Medium 与 Bold 两档，末节并列西文 `H` 与中文「中」的竖干。
 
-![中文字重对照](assets/cjk-weight-comparison.png)
+![中文字重对照](assets/specimens/cjk-weight-comparison.png)
 
 **假名预览**：五十音、浊音拗音、带圈方块符号与日文样句。
 
-![假名字体预览](assets/kana-preview.png)
+![假名字体预览](assets/specimens/kana-preview.png)
 
 **韩文预览**：兼容 Jamo、音节抽样、带圈韩文、韩文句段与六文混排。
 
-![韩文字体预览](assets/hangul-preview.png)
+![韩文字体预览](assets/specimens/hangul-preview.png)
 
 **多文种样张**与**双语排版样张**：
 
-![多文种混排样张](assets/multilingual-specimen.png)
+![多文种混排样张](assets/specimens/multilingual-specimen.png)
 
-![中英混排样张](assets/type-specimen-sheet.png)
+![中英混排样张](assets/specimens/type-specimen-sheet.png)
 
 **L3 后处理对照**：左为已撤回的坏版（可见飞线），中为原版，右为逐字审计后的 L3。
 
-![L3 笔画骨架后处理对照](assets/l3-comparison.png)
+![L3 笔画骨架后处理对照](assets/specimens/l3-comparison.png)
+
+**标准版字体校样 REV.3**（2026-11-24，对应上面那份 `Standard.ttf`）：`A` 与「文」同朱红基线、六档字号含 10 / 12 px 小字、行距按字号 ×1.45、400 px 字腔与收笔引线、200 px 对照带、反白区、深底 10 / 12 px 真实渲染 ×4 放大块，千字文 40 字区已做到零竖网格。
+
+![标准版字体校样 REV.3](assets/specimens/standard-specimen-REV3.png)
+
+![校样手机缩略版 800x2112](assets/specimens/standard-specimen-REV3-mobile.jpg)
+
+![深底 10/12px 小字放大单图](assets/specimens/standard-specimen-REV3-dark-small.jpg)
+
+<details>
+<summary>三段原尺寸分图（1600 px 宽，展开查看）</summary>
+
+![校样分段 1/3](assets/specimens/standard-specimen-REV3-part1.jpg)
+
+![校样分段 2/3](assets/specimens/standard-specimen-REV3-part2.jpg)
+
+![校样分段 3/3](assets/specimens/standard-specimen-REV3-part3.jpg)
+
+</details>
 
 ---
 
@@ -157,13 +171,13 @@ body {
 
 这一节不是第五档预设，只是保留下来供复现与继续研究的实验。它引入汉字笔画骨架，只对独立横画末端做有限压平，并对每个改动过的字重新渲染、逐像素审计，任何飞线、断笔、字怀异常单独回滚；四档强度合并后 6,624 字改动、结构复审零缺陷、720 个西文字形逐字节不变。**但「零结构缺陷」不等于「规整」**——像素级审计管的是不损坏，四项标准管的是整套字的一致性，后者没过。
 
-`scripts/verify_norm.py` 把四项标准固化成可复现的验收门槛，任何后续改版都要四项全过才算达标。实测数据见 `assets/norm-report.json`，完整方法、参数表与未达成部分见 [docs/L3.md](docs/L3.md)，样张见 `assets/l3-comparison.png`。实验命令链：
+`scripts/verify_norm.py` 把四项标准固化成可复现的验收门槛，任何后续改版都要四项全过才算达标。实测数据见 `assets/reports/norm-report.json`，完整方法、参数表与未达成部分见 [docs/L3.md](docs/L3.md)，样张见 `assets/specimens/l3-comparison.png`。实验命令链：
 
 ```bash
-python3 scripts/l3_pipeline.py fetch
-python3 scripts/l3_pipeline.py build --tag p55 --pull 0.55
-python3 scripts/l3_pipeline.py audit --tag p55
-python3 scripts/l3_pipeline.py merge --tags p55
+python3 scripts/experimental/l3_pipeline.py fetch
+python3 scripts/experimental/l3_pipeline.py build --tag p55 --pull 0.55
+python3 scripts/experimental/l3_pipeline.py audit --tag p55
+python3 scripts/experimental/l3_pipeline.py merge --tags p55
 ```
 
 ---
@@ -183,36 +197,43 @@ python3 scripts/l3_pipeline.py merge --tags p55
 | 文档 | 内容 |
 | --- | --- |
 | [docs/L3.md](docs/L3.md) | 实验 L3：笔画骨架、四项验收未通过的实测数据与根因 |
-| [docs/COMPLIANCE.md](docs/COMPLIANCE.md) | 为什么不含二进制、上游授权、OFL 义务、商标与再分发自查 |
+| [docs/COMPLIANCE.md](docs/COMPLIANCE.md) | 唯一一份字体的授权风险、上游授权、OFL 义务、商标与再分发自查 |
 | [docs/BUILD.md](docs/BUILD.md) | 依赖、目录布局、四档构建命令、参数表、字重实测、验证与改名 |
 | [docs/CHARACTER-SET.md](docs/CHARACTER-SET.md) | 按 Unicode 分区的逐段覆盖明细与刻意不收录的范围 |
 | [docs/USAGE.md](docs/USAGE.md) | 安装、CSS、多语言示例、OpenType 特性、子集化、渲染注意事项 |
 | [FONTLOG.txt](FONTLOG.txt) | 逐项修改记录与版本历史，遵循 OFL 惯例 |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | 贡献方式与二进制红线 |
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | 社区行为准则 |
-| [SOURCE-MANIFEST.txt](SOURCE-MANIFEST.txt) | 仓库内全部文件的 SHA-256，便于校验来源包完整性 |
+| [assets/reports/](assets/reports/) | L3 审计报告与四项规整度实测报告 |
+| [SOURCE-MANIFEST.txt](SOURCE-MANIFEST.txt) | 仓库内全部文件（含唯一一份 TTF）的 SHA-256，便于校验完整性 |
 
 ## 项目结构
 
 ```
 .
 ├── scripts/
-│   ├── build_cjk.py      构建脚本，四档预设
-│   ├── make_woff2.py     TTF 转 WOFF2
-│   ├── verify.py         产物结构与字符覆盖校验
-│   ├── l3_pipeline.py    实验 L3：fetch / build / audit / merge
-│   └── verify_norm.py    四项规整度验收（正式门槛）
-├── docs/                 合规、L3、构建、字符集、使用五篇文档
-├── assets/               七张样张图 + 规整度报告（不含字体软件）
-├── inputs/               本地放上游字体，被 .gitignore 排除
-├── build/                本地产物，被 .gitignore 排除
-├── README.md             本文件
-├── LICENSE               文档与脚本许可，以及分层授权说明
-├── OFL.txt               SIL Open Font License 1.1 全文
-├── FONTLOG.txt           修改记录与版本历史
-├── CITATION.cff          引用信息
-├── SOURCE-MANIFEST.txt   文件校验清单
-└── .gitignore            排除全部字体二进制与凭证
+│   ├── build_cjk.py          构建脚本，四档预设
+│   ├── make_woff2.py         TTF 转 WOFF2
+│   ├── verify.py             产物结构与字符覆盖校验
+│   ├── verify_norm.py        四项规整度验收（正式门槛）
+│   └── experimental/
+│       └── l3_pipeline.py    实验 L3：fetch / build / audit / merge
+├── docs/                     合规、L3、构建、字符集、使用五篇文档
+├── assets/
+│   ├── specimens/           13 张样张图（含 REV.3 六图）
+│   └── reports/             L3 审计报告与四项规整度报告
+├── fonts/
+│   └── SerifCJKExtension-Standard.ttf   唯一收录的字体二进制
+├── inputs/                   本地放上游字体，被 .gitignore 排除
+├── build/                    本地产物，被 .gitignore 排除
+├── data/                     L3 运行时笔画索引，被 .gitignore 排除
+├── README.md                 本文件
+├── LICENSE                   仓库材料许可与分层授权说明
+├── OFL.txt                   SIL Open Font License 1.1 全文
+├── FONTLOG.txt               修改记录与版本历史
+├── CITATION.cff              引用信息
+├── SOURCE-MANIFEST.txt       文件校验清单
+└── .gitignore                排除其余字体二进制、输入产物与凭证
 ```
 
 ## 获取帮助
@@ -223,13 +244,13 @@ python3 scripts/l3_pipeline.py merge --tags p55
 
 ## 贡献与维护
 
-欢迎提交缺字报告、构建脚本改进、文档修正与样张优化，流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。两条红线：任何 PR 都**不得**提交字体二进制、上游字体文件或凭证；涉及新增轮廓来源的改动必须写明来源与许可。仓库由 [Moirania](https://github.com/Moirania) 维护。
+欢迎提交缺字报告、构建脚本改进、文档修正与样张优化，流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。红线：除已收录的那一份 `Standard.ttf` 外，任何 PR 都**不得**新增或替换字体二进制，也不得提交上游字体文件或凭证；涉及新增轮廓来源的改动必须写明来源与许可。仓库由 [Moirania](https://github.com/Moirania) 维护。
 
 ## 许可证
 
 - 仓库中的文档、脚本与样张图：见 [LICENSE](LICENSE)。
 - 你本地生成字体里的新增轮廓（中文、假名、韩文、拉丁扩展、希腊、西里尔）：[SIL Open Font License 1.1](OFL.txt)，版权与条件见 [LICENSE](LICENSE) 与 [FONTLOG.txt](FONTLOG.txt)。
-- 上游西文轮廓：专有字体，权利归 Anthropic, PBC 所有，**不适用**上述任何开源许可，也不由本仓库提供或再授权。完整说明见 [docs/COMPLIANCE.md](docs/COMPLIANCE.md)。
+- 上游西文轮廓：专有字体，权利归 Anthropic, PBC 所有，**不适用**上述任何开源许可。`fonts/SerifCJKExtension-Standard.ttf` 含这部分轮廓，其公开再分发的权利状态不清晰，本仓库不提供授权结论；完整说明见 [docs/COMPLIANCE.md](docs/COMPLIANCE.md)。
 
 ## 致谢
 

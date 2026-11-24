@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this build method, cite it as below and state which preset you used."
 title: "Anthropic Serif CJK Rebuild"
-abstract: "A source-only, reproducible rebuild of a multilingual serif font. The repository ships no font binaries: the reader supplies a legally obtained proprietary Latin base plus two SIL OFL sources and runs scripts/build_cjk.py locally. An optional L3 stroke-skeleton post-processing pipeline is also provided. Four presets produce cjk (31,724 glyphs), cjk-bold (same coverage, heavier Chinese), multilingual (33,897 glyphs, adds Latin Extended, Greek and Cyrillic) and full (47,092 glyphs / 46,963 code points, adds kana, Hangul and CJK symbols). The output is renamed to Serif CJK Extension by default and preserves all upstream Latin outlines, 19 GSUB features and 2 GPOS features. Repository material is MIT; generated added outlines are SIL OFL 1.1; the upstream Latin outlines are proprietary and not supplied. See LICENSE."
+abstract: "A reproducible rebuild of a multilingual serif font. As of 2026-11-24 the repository ships exactly one font binary, fonts/SerifCJKExtension-Standard.ttf (the cjk production build); all other outputs remain local-only. The reader can also supply a legally obtained proprietary Latin base plus two SIL OFL sources and run scripts/build_cjk.py locally. An optional L3 stroke-skeleton post-processing pipeline is also provided. Four presets produce cjk (31,724 glyphs), cjk-bold (same coverage, heavier Chinese), multilingual (33,897 glyphs, adds Latin Extended, Greek and Cyrillic) and full (47,092 glyphs / 46,963 code points, adds kana, Hangul and CJK symbols). The output is renamed to Serif CJK Extension by default and preserves all upstream Latin outlines, 19 GSUB features and 2 GPOS features. Repository material is MIT; generated added outlines are SIL OFL 1.1; the upstream Latin outlines inside the shipped TTF are proprietary and their public redistribution status is unresolved. See LICENSE and docs/COMPLIANCE.md."
 authors:
   - family-names: "Lin"
     given-names: "Yingxue"
@@ -30,5 +30,6 @@ keywords:
   - sil-ofl
   - opentype
   - unicode
-version: "1.0.0"
-date-released: "2026-11-19"
+  - font-specimen
+version: "1.5.0"
+date-released: "2026-11-24"

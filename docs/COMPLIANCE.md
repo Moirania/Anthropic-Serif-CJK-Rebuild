@@ -1,36 +1,45 @@
 # Compliance and licensing
 
-This repository deliberately contains **no font binaries**. Read this
-document before building, using or redistributing anything produced by the
-scripts here.
+Read this document before building, using or redistributing anything here.
+**Scope changed on 2026-11-24**: this repository now ships exactly one font
+binary, `fonts/SerifCJKExtension-Standard.ttf`. All other built fonts remain
+local-only.
 
-## 1. Why the binaries are absent
+## 1. Why there is exactly one binary, and the risk it carries
 
 The base font, Anthropic Serif Web Text Regular, is a proprietary brand
 typeface. Anthropic, PBC does not publish a public font licence for it, and
 third-party references describe it as a non-licensed brand font. It is
 **not** a SIL OFL font.
 
-A composite font necessarily contains every Western outline from that base.
-Publishing such a file in a public repository, attaching it to a Release,
-or mirroring it elsewhere is a redistribution of proprietary outlines whose
-permission status is unclear. This repository therefore follows the
-conservative publication path:
+Every composite font produced by these scripts contains all 720 Western
+outlines from that base. At the maintainer's explicit request, one such
+composite -- the `cjk` preset production build -- is now committed as
+`fonts/SerifCJKExtension-Standard.ttf` and listed in
+[../SOURCE-MANIFEST.txt](../SOURCE-MANIFEST.txt).
 
 | Shipped here | Not shipped here |
 | --- | --- |
 | Build script and parameters | The upstream Latin TTF |
-| Documentation and verification data | Generated TTF / WOFF2 / OTF files |
+| One `cjk` preset TTF under `fonts/` | `cjk-bold`, `multilingual`, `full` outputs |
+| 13 specimen images and 2 reports | Generated WOFF2 / OTF files |
 | OFL text, copyright notices, FONTLOG | TTC / OTF outline sources |
-| Specimen images | Credentials or local paths |
+| Verification scripts and audit data | Credentials or local paths |
 
-The `inputs/`, `build/` and `dist/` directories and all common font
-extensions are excluded by [../.gitignore](../.gitignore). GitHub Releases
-for this repository contain source material only.
+**This is a redistribution of proprietary outlines whose permission status
+is unclear.** Renaming the family to `Serif CJK Extension` is a naming
+measure, not a licence. This repository grants no permission and reaches no
+legal conclusion on behalf of Anthropic, PBC. Before downloading, mirroring
+or using that file -- especially in commercial or client work -- verify your
+own right to do so with the rights holder. The fact that one copy is present
+here does not give that right to anyone else.
 
-You supply the upstream font yourself, on your own machine, and the script
-reads it locally. No upload occurs and no binary leaves your machine unless
-you choose to publish it.
+If you want to avoid the binary entirely, ignore `fonts/` and build locally
+from your own legally obtained inputs. No script reads that directory.
+
+`inputs/`, `build/`, `dist/` and all common font extensions remain excluded
+by [../.gitignore](../.gitignore), with a single explicit exception for the
+one production TTF.
 
 ## 2. What you must supply
 
@@ -87,7 +96,8 @@ endorsement by Anthropic, Adobe or Google.
 Use this checklist:
 
 - [ ] I have a legal right to use and, if applicable, redistribute the
-      upstream Latin outlines.
+      upstream Latin outlines. The one binary shipped here does not grant
+      that right to anyone else.
 - [ ] `OFL.txt` and `FONTLOG.txt` travel with the binary.
 - [ ] Copyright lines in `name` ID 0 name Adobe and The Noto Project
       Authors for their respective outlines.
@@ -95,17 +105,18 @@ Use this checklist:
       names.
 - [ ] The font is not sold by itself and is not presented as endorsed by
       the original designers.
-- [ ] I am not committing the binary, the upstream font, or credentials to
-      any public repository.
+- [ ] I am not committing the upstream font, a second font binary, or
+      credentials to any public repository.
 - [ ] For commercial or client work, I have obtained whatever additional
       permission the upstream rights holder requires.
 
 ## 6. Simplest fully compliant configuration
 
-If in doubt, use the output only locally or inside your own organisation,
-do not publish the binary, and share this repository instead: readers can
-reproduce the method with their own legally obtained inputs. That is the
-configuration this repository is designed for.
+If in doubt, use every output only locally or inside your own organisation,
+do not republish the binary, and share the source-only parts of this
+repository instead: readers can reproduce the method with their own legally
+obtained inputs. Treat `fonts/SerifCJKExtension-Standard.ttf` as an
+exception made at the maintainer's request, not as a licence grant.
 
 ## 7. Disclaimer
 
