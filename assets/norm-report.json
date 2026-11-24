@@ -1,0 +1,83 @@
+{
+  "sample_chars": 39,
+  "sets": {
+    "stroke": "二三王土干工正日目田十下上百自且直",
+    "counter": "口日目田回品昌由甲申早古占右石",
+    "centre": "一二三中口日目田王土干工正大天人山文國永天地"
+  },
+  "reference": {
+    "stroke_h_cv": 0.0098,
+    "stroke_v_cv": 0.0998,
+    "stroke_h_mean": 11.9706,
+    "stroke_v_mean": 32.5625,
+    "counter_cv": 0.4248,
+    "counter_mean": 0.3011,
+    "centre_std": 0.0632,
+    "centre_mean": 0.5347,
+    "centre_spread": 0.322,
+    "middle_cv": 0.191,
+    "middle_mean": 0.749
+  },
+  "candidate": {
+    "stroke_h_cv": 0.0409,
+    "stroke_v_cv": 0.0998,
+    "stroke_h_mean": 11.8235,
+    "stroke_v_mean": 32.6562,
+    "counter_cv": 0.4285,
+    "counter_mean": 0.2877,
+    "centre_std": 0.0645,
+    "centre_mean": 0.5287,
+    "centre_spread": 0.3323,
+    "middle_cv": 0.1921,
+    "middle_mean": 0.7516
+  },
+  "candidate_minus_reference": {
+    "counter": {
+      "n": 39,
+      "mean": -0.00394,
+      "std": 0.03941,
+      "max_abs": 0.24384
+    },
+    "centre_y": {
+      "n": 39,
+      "mean": -0.00523,
+      "std": 0.00956,
+      "max_abs": 0.03561
+    },
+    "middle_white": {
+      "n": 39,
+      "mean": 0.00093,
+      "std": 0.01055,
+      "max_abs": 0.03535
+    },
+    "h_thick": {
+      "n": 38,
+      "mean": -0.10526,
+      "std": 0.36559,
+      "max_abs": 2.0
+    },
+    "v_thick": {
+      "n": 38,
+      "mean": -0.15789,
+      "std": 1.17599,
+      "max_abs": 7.0
+    }
+  },
+  "verdict": {
+    "checks": {
+      "1_stroke_weight": false,
+      "2_counter_white": true,
+      "3_centre_line": false,
+      "4_central_aperture": true
+    },
+    "passed": 2,
+    "total": 4,
+    "accepted": false
+  },
+  "inner_contour_evidence": {
+    "sample_chars_touched": 31,
+    "moved_points": 147,
+    "of_them_inner_contour": 27,
+    "inner_pct": 18.37
+  }
+}

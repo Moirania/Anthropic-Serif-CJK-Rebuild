@@ -123,6 +123,32 @@ Version 1.400 L3 post-processing (optional, source only)
   ratio 0.9886). This version prioritises normative, clean glyphs over
   a distinctive new design; it is not a hand-drawn L3 typeface.
 
+Version 1.401 four-point normative audit
+----------------------------------------
+
+- Added scripts/verify_norm.py, which turns the maintainer's four
+  criteria (stroke weight consistency, counter white uniformity, a
+  shared optical centre line, and a uniform central aperture) into
+  reproducible measurements. A candidate is accepted only when none
+  of the four gets worse than the reference build.
+- Measured L3 against the untouched cjk build with 39 sample
+  characters. Result: 0 of 4 passed under the strict rule, 2 of 4
+  under a 2% tolerance; accepted: false. Horizontal stroke CV rose
+  0.0098 -> 0.0409, centre-of-mass std 0.0632 -> 0.0645 with a
+  systematic -0.00523 shift, counter CV 0.4248 -> 0.4285 and middle
+  aperture CV 0.1910 -> 0.1921. Per-glyph counter change reached
+  0.2438 of the em square.
+- Root cause identified: the L3 window selector did not distinguish
+  outer from inner contours. Of 147 moved points in the sample, 27
+  (18.37%) were on inner contours, so counter boundaries were
+  flattened along with the stroke tips. Single-direction pressing
+  also made horizontal thickness uneven and pulled the optical
+  centre down.
+- Consequence: cjk (the untouched Source Han Serif Medium build) is
+  the recommended production version. l3_pipeline.py is retained as
+  an experimental tool only. Added assets/norm-report.json and
+  updated docs/L3.md and README.md accordingly.
+
 Known limitations
 -----------------
 
