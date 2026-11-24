@@ -32,3 +32,6 @@ Thumbs.db
 *.token
 *.pem
 secrets/
+
+# L3 runtime stroke index (third-party data, not redistributed)
+data/

@@ -33,6 +33,8 @@ licence. Without that information a pull request cannot be merged.
   print-specimen style: hard rules, crop marks, left alignment, no
   rounded corners, no glass, no gradient buttons.
 - Add a subsetting recipe to [docs/USAGE.md](docs/USAGE.md).
+- Improve the L3 stroke gate or audit rules; read [docs/L3.md](docs/L3.md)
+  first and state which glyphs you proofed.
 - Propose a new preset, with its source font, licence and expected counts.
 
 ## Pull request process

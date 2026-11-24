@@ -145,6 +145,27 @@ body {
 
 ![中英混排样张](assets/type-specimen-sheet.png)
 
+**L3 后处理对照**：左为已撤回的坏版（可见飞线），中为原版，右为逐字审计后的 L3。
+
+![L3 笔画骨架后处理对照](assets/l3-comparison.png)
+
+---
+
+## 可选：L3 笔画骨架后处理
+
+这一节不是第五档预设。若希望中文末端更贴近西文衬线，可对已经生成的 `cjk` 版追加一层后处理：引入汉字笔画骨架数据，只对独立的横画末端做有限压平，并对**每一个改动过的字**重新渲染、逐像素审计，任何飞线、断笔、字怀异常都会单独回滚。
+
+四档强度合并后，6,624 个字形完成改动、复审零缺陷，720 个西文字形逐字节不变。代价是视觉变化温和（平均墨色约 -1.14%），且只覆盖笔画数据能命中的 9,565 字（30.27%）。它优先保证规范工整，不追求强烈独特。
+
+完整方法、参数表、审计规则与明确未达成的部分见 [docs/L3.md](docs/L3.md)，样张见 `assets/l3-comparison.png`。命令链：
+
+```bash
+python3 scripts/l3_pipeline.py fetch
+python3 scripts/l3_pipeline.py build --tag p55 --pull 0.55
+python3 scripts/l3_pipeline.py audit --tag p55
+python3 scripts/l3_pipeline.py merge --tags p55
+```
+
 ---
 
 ## 构建原理
@@ -161,6 +182,7 @@ body {
 
 | 文档 | 内容 |
 | --- | --- |
+| [docs/L3.md](docs/L3.md) | 可选 L3 后处理：笔画骨架、审计规则、四档强度与未达成目标 |
 | [docs/COMPLIANCE.md](docs/COMPLIANCE.md) | 为什么不含二进制、上游授权、OFL 义务、商标与再分发自查 |
 | [docs/BUILD.md](docs/BUILD.md) | 依赖、目录布局、四档构建命令、参数表、字重实测、验证与改名 |
 | [docs/CHARACTER-SET.md](docs/CHARACTER-SET.md) | 按 Unicode 分区的逐段覆盖明细与刻意不收录的范围 |
@@ -177,9 +199,10 @@ body {
 ├── scripts/
 │   ├── build_cjk.py      构建脚本，四档预设
 │   ├── make_woff2.py     TTF 转 WOFF2
-│   └── verify.py         产物结构与字符覆盖校验
-├── docs/                 合规、构建、字符集、使用四篇文档
-├── assets/               六张样张图（图片不含字体软件）
+│   ├── verify.py         产物结构与字符覆盖校验
+│   └── l3_pipeline.py    可选 L3：fetch / build / audit / merge
+├── docs/                 合规、L3、构建、字符集、使用五篇文档
+├── assets/               七张样张图 + L3 审计报告（不含字体软件）
 ├── inputs/               本地放上游字体，被 .gitignore 排除
 ├── build/                本地产物，被 .gitignore 排除
 ├── README.md             本文件

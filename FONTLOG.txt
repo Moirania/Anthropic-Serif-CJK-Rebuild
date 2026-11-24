@@ -90,12 +90,38 @@ Modifications
   without a reference binary, and scripts/make_woff2.py for local WOFF2
   conversion.
 
-- Produced six specimen sheets in assets/ from locally built fonts:
+- Produced seven specimen sheets in assets/ from locally built fonts:
   before-after.png, cjk-weight-comparison.png, kana-preview.png,
-  hangul-preview.png, multilingual-specimen.png, type-specimen-sheet.png.
+  hangul-preview.png, multilingual-specimen.png, type-specimen-sheet.png, l3-comparison.png.
   Print-specimen style: hard 1px rules, crop marks, left alignment,
   generous margins, no rounded corners, no glass, no gradient buttons.
 
+
+Version 1.400 L3 post-processing (optional, source only)
+--------------------------------------------------------
+
+- Withdrew the broken v1.300 signature preset in full: engine, DNA
+  measurement, design log, specimen and release all removed.
+- Added scripts/l3_pipeline.py with four subcommands (fetch, build,
+  audit, merge). It uses external hanzi-writer stroke medians so that
+  only genuine horizontal strokes are considered; pie, na, dian and
+  folded strokes are gated out. No point is added or removed, no x
+  coordinate changes, and topology is preserved by construction.
+- Every changed glyph is re-rendered and checked for component count,
+  hole count, hairline fragments, bbox shift, local blobs and total ink
+  delta. Any anomaly rolls that single glyph back to the untouched
+  Source Han outline.
+- Four strength tiers (PULL 0.45 / 0.55 / 0.65 / 0.80) produced
+  6165 / 4957 / 3834 / 2063 passing glyphs respectively, each with
+  zero residual defects after rollback. Merging the strongest passing
+  variant per glyph yields 6624 changed glyphs, re-audited to zero
+  defects, with all 720 Western outlines byte-identical.
+- Added docs/L3.md, assets/l3-comparison.png and assets/l3-report.json.
+  The stroke index (9565 characters, 30.27% of the cjk build) is
+  downloaded at run time and is not committed.
+- Known trade-off: the visual change is deliberately mild (mean ink
+  ratio 0.9886). This version prioritises normative, clean glyphs over
+  a distinctive new design; it is not a hand-drawn L3 typeface.
 
 Known limitations
 -----------------

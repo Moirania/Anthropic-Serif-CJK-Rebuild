@@ -1,0 +1,50 @@
+{
+  "final": "L3-final.ttf",
+  "index_chars": 9565,
+  "per_tag_passed": {
+    "p80": 2063,
+    "p65": 3834,
+    "p55": 4957,
+    "p45": 6165
+  },
+  "merged_glyphs": 6624,
+  "source_distribution": {
+    "p80": 2063,
+    "p65": 2050,
+    "p55": 1278,
+    "p45": 1233
+  },
+  "re_audit_defects": 0,
+  "re_audit_sample": [],
+  "western_720_identical": true,
+  "ink_ratio_mean": 0.9886,
+  "ink_ratio_min": 0.8351,
+  "ink_ratio_max": 1.0996,
+  "size_bytes": 16037184,
+  "params_by_tag": {
+    "p80": {
+      "PULL": 0.8,
+      "WINDOW_X": 330,
+      "WINDOW_Y": 210,
+      "MIN_RISE": 8
+    },
+    "p65": {
+      "PULL": 0.65,
+      "WINDOW_X": 280,
+      "WINDOW_Y": 190,
+      "MIN_RISE": 8
+    },
+    "p55": {
+      "PULL": 0.55,
+      "WINDOW_X": 260,
+      "WINDOW_Y": 180,
+      "MIN_RISE": 8
+    },
+    "p45": {
+      "PULL": 0.45,
+      "WINDOW_X": 240,
+      "WINDOW_Y": 170,
+      "MIN_RISE": 8
+    }
+  }
+}
