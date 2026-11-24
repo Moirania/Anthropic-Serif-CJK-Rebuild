@@ -10,14 +10,11 @@ points the Latin base already covered.
 | --- | --- | --- | --- | --- |
 | `cjk` | 31,004 | 31,724 | 31,595 | 2,306 |
 | `cjk-bold` | 31,004 | 31,724 | 31,595 | 2,306 |
-| `signature` | 31,004 | 31,724 | 31,595 | 2,306 |
 | `multilingual` | 33,177 | 33,897 | 33,768 | 2,394 |
 | `full` | 46,372 | 47,092 | 46,963 | 2,619 |
 
-`cjk`, `cjk-bold` and `signature` have **byte-identical cmap dictionaries**;
-only the outline instances differ. `signature` uses the Regular CJK source
-and redraws terminals; see [DESIGN.md](DESIGN.md). See [BUILD.md](BUILD.md)
-for the weight table.
+`cjk` and `cjk-bold` have **byte-identical cmap dictionaries**; only the
+outline instances differ. See [BUILD.md](BUILD.md) for the weight table.
 
 The upstream font contributes 628 code points, of which 591 live in its
 Unicode BMP subtables and 37 exist only in its Macintosh (1,0,6) subtable.

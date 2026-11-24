@@ -13,12 +13,10 @@ steps and [COMPLIANCE.md](COMPLIANCE.md) before sharing the result.
 | `cjk-bold` | ~15.3 MB | ~7.2 MB | 31,724 |
 | `multilingual` | ~15.6 MB | ~7.0 MB | 33,897 |
 | `full` | ~23.6 MB | ~8.4 MB | 47,092 |
-| `signature` | ~17.0 MB | ~7.5 MB | 31,724 |
 
 Default naming: `SerifCJKExtension-CJK.ttf`,
 `SerifCJKExtension-CJK-Bold.ttf`,
-`SerifCJKExtension-Multilingual.ttf`, `SerifCJKExtension-Full.ttf`,
-`SerifCJKExtension-Signature.ttf`.
+`SerifCJKExtension-Multilingual.ttf`, `SerifCJKExtension-Full.ttf`.
 The internal family name is `Serif CJK Extension` unless you passed
 `--keep-upstream-name` or a custom `--family-name`.
 
@@ -29,7 +27,7 @@ The internal family name is `Serif CJK Extension` unless you passed
 - **macOS**: open the TTF with Font Book and click Install Font.
 - **Linux**: copy to `~/.local/share/fonts/`, then run `fc-cache -fv`.
 
-All five presets share the same family name and the same `Regular`
+All four presets share the same family name and the same `Regular`
 subfamily, so install **only one**. In particular `cjk` and `cjk-bold` are
 indistinguishable to the font cache. Verify with:
 
@@ -157,7 +155,6 @@ for the upstream proprietary Latin outlines still apply; read
 | Build exits with "input file not found" | Wrong `--latin`, `--cjk-ttc` or `--lgc-font` | Check absolute paths and TTC face index |
 | Chinese, kana or Hangul shows boxes | A smaller preset is installed | Build and install `full`, clear the font cache |
 | Chinese looks thin and pale | `cjk` Medium is lighter than the Western stems | Use `cjk-bold`; do not stack `font-weight: 700` |
-| Chinese serifs clash with the Latin | Source Han triangular terminals | Use `signature`; read its documented limits in [DESIGN.md](DESIGN.md) |
 | Two presets installed, unpredictable results | Identical family and subfamily names | Remove one and clear the font cache |
 | Hangul Jamo typed separately do not form a syllable | No Jamo composition lookups | Use precomposed U+AC00-U+D7A3 or a shaping engine |
 | `fi` no longer joins | Subset dropped layout features | Rebuild with `--layout-features='*'` |

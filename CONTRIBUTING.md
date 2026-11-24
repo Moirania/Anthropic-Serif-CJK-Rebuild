@@ -33,9 +33,6 @@ licence. Without that information a pull request cannot be merged.
   print-specimen style: hard rules, crop marks, left alignment, no
   rounded corners, no glass, no gradient buttons.
 - Add a subsetting recipe to [docs/USAGE.md](docs/USAGE.md).
-- Improve terminal detection or add a stroke-class rule to
-  `scripts/harmonize.py`; state which glyphs you proofed and include a
-  before/after sheet. Read [docs/DESIGN.md](docs/DESIGN.md) first.
 - Propose a new preset, with its source font, licence and expected counts.
 
 ## Pull request process

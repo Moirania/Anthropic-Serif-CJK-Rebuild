@@ -1,6 +1,6 @@
 # Anthropic Serif CJK Rebuild
 
-[![Binaries](https://img.shields.io/badge/Font%20binaries-not%20included-A62E26)](docs/COMPLIANCE.md) [![Presets](https://img.shields.io/badge/Build%20presets-5-222118)](docs/BUILD.md) [![Max glyphs](https://img.shields.io/badge/Max%20glyphs-47092-222118)](docs/CHARACTER-SET.md) [![UPM](https://img.shields.io/badge/UPM-2000-222118)](docs/BUILD.md) [![Outlines](https://img.shields.io/badge/Outlines-SIL%20OFL%201.1-222118)](OFL.txt) [![Upstream](https://img.shields.io/badge/Upstream-BYOSF-746F64)](docs/COMPLIANCE.md)
+[![Binaries](https://img.shields.io/badge/Font%20binaries-not%20included-A62E26)](docs/COMPLIANCE.md) [![Presets](https://img.shields.io/badge/Build%20presets-4-222118)](docs/BUILD.md) [![Max glyphs](https://img.shields.io/badge/Max%20glyphs-47092-222118)](docs/CHARACTER-SET.md) [![UPM](https://img.shields.io/badge/UPM-2000-222118)](docs/BUILD.md) [![Outlines](https://img.shields.io/badge/Outlines-SIL%20OFL%201.1-222118)](OFL.txt) [![Upstream](https://img.shields.io/badge/Upstream-BYOSF-746F64)](docs/COMPLIANCE.md)
 
 从源码**重新制作**一套多文种衬线字体的完整工程。仓库里**没有任何字体文件**：你自备一份合法取得的上游西文字体，再准备两个开源字族，运行脚本即可在本机生成成品。
 
@@ -32,13 +32,13 @@
 - 新增轮廓统一到 2000 UPM，中文与假名全宽 1em，韩文音节 1932 单位；
 - 「A」「文」「あ」「한」「α」「Ж」落在同一条基线与同一套垂直度量上；
 - 原字体的 19 个 GSUB 特性（连字 `fi`/`ffi`、小型大写、旧式数字、分数、样式集等）与 2 个 GPOS 特性全部保留，因为新字形只追加在字形表末尾，原 glyph id 未变；
-- 五档预设对应四种覆盖级别与一档独立重绘版，从「只补中文」到「中日韩加希腊西里尔全覆盖」，再到按西文设计语法重绘的 `signature`。
+- 四类预设对应四种覆盖级别，从「只补中文」到「中日韩加希腊西里尔全覆盖」。
 
 **为什么叫「重新制作」**：默认输出会重写 `name` 表，家族名改为 `Serif CJK Extension`，PostScript 名改为 `SerifCJKExtension-Regular`，版本串按预设重设。它是一份按公开工程重新生成、独立命名的新字体，而不是把某个现成二进制另存一份。想完全复刻原命名，加 `--keep-upstream-name` 即可。
 
 ---
 
-## 五档预设
+## 四档预设
 
 | 预设 | 中文轮廓 | 追加码位 | 字形 | 可用码位 | 适用 |
 | --- | --- | --- | --- | --- | --- |
@@ -46,11 +46,9 @@
 | `cjk-bold` | Noto Serif CJK SC Bold | 31,004 | 31,724 | 31,595 | 觉得中文偏细偏淡 |
 | `multilingual` | Medium | 33,177 | 33,897 | 33,768 | 中英希俄、IPA、polytonic 希腊 |
 | `full` | Medium | 46,372 | 47,092 | 46,963 | 再加假名、韩文与 CJK 符号 |
-| `signature` | **Regular + 衬线重绘** | 31,004 | 31,724 | 31,595 | 要一套真正适配西文衬线语法的独特版本 |
 
 `cjk` 与 `cjk-bold` 的码位完全一致，只有中文轮廓字重不同。实测同一段文字墨色从 21,178 px 增至 28,082 px（+32.6%），中文「中」竖干从 54.5 px 增至 70.7 px，而西文 `H` 竖干 61.4 px 纹丝不动。七档字重的实测表见 [docs/BUILD.md](docs/BUILD.md)。
 
-**`signature` 是唯一一档重新设计中文轮廓的版本**：先用 `scripts/measure_dna.py` 从西文实测衬线头、应力轴与横竖对比，再据此换用 Regular 源字重、把三角顿笔尖端削成带 bracket 的竖直平切、并对齐 5 度应力轴。横竖对比从 2.750 收敛到 2.273（西文 2.098），31,004 字中 99.75% 完成重建、221,484 个衬线端、零失败。它是设计 DNA 驱动的参数化重绘，不是设计师逐字手绘；三角顿笔斜坡仍保留、对比未精确到 2.098，全部实验与否决路径见 [docs/DESIGN.md](docs/DESIGN.md)。
 
 ---
 
@@ -83,7 +81,7 @@ python3 scripts/build_cjk.py \
   --preset cjk
 ```
 
-把 `--preset` 换成 `cjk-bold`、`multilingual`、`full` 或 `signature` 即可得到另外四版。成品默认写到 `build/SerifCJKExtension-CJK.ttf` 等路径。若 Noto 字体分散在不同目录，用 `--cjk-ttc` 与 `--lgc-font` 分别指定绝对路径。
+把 `--preset` 换成 `cjk-bold`、`multilingual` 或 `full` 即可得到另外三版。成品默认写到 `build/SerifCJKExtension-CJK.ttf` 等路径。若 Noto 字体分散在不同目录，用 `--cjk-ttc` 与 `--lgc-font` 分别指定绝对路径。
 
 ### 4. 转换与校验
 
@@ -92,7 +90,7 @@ python3 scripts/make_woff2.py build/SerifCJKExtension-CJK.ttf
 python3 scripts/verify.py build/SerifCJKExtension-CJK.ttf --preset cjk
 ```
 
-`verify.py` 会打印家族名、版本号、UPM、垂直度量、字形数、码位数、cmap 子表、GSUB/GPOS 数量，并逐个检查拉丁、中文、希腊、假名、韩文与符号的样例码位。五档预设的期望数值已内置。
+`verify.py` 会打印家族名、版本号、UPM、垂直度量、字形数、码位数、cmap 子表、GSUB/GPOS 数量，并逐个检查拉丁、中文、希腊、假名、韩文与符号的样例码位。四档预设的期望数值已内置。
 
 ---
 
@@ -115,7 +113,7 @@ body {
 }
 ```
 
-桌面安装：双击 TTF（Windows 选「安装」，macOS 用「字体册」，Linux 复制到 `~/.local/share/fonts/` 后执行 `fc-cache -fv`）。五档预设内部家族名相同，**同一台机器只装一版**；`cjk` 与 `cjk-bold` 的子族名也都是 Regular，尤其不能并存。
+桌面安装：双击 TTF（Windows 选「安装」，macOS 用「字体册」，Linux 复制到 `~/.local/share/fonts/` 后执行 `fc-cache -fv`）。四档预设内部家族名相同，**同一台机器只装一版**；`cjk` 与 `cjk-bold` 的子族名也都是 Regular，尤其不能并存。
 
 更多排版示例、子集化命令、渲染注意事项与故障排查见 [docs/USAGE.md](docs/USAGE.md)。
 
@@ -132,10 +130,6 @@ body {
 **中文字重对照**：Medium 与 Bold 两档，末节并列西文 `H` 与中文「中」的竖干。
 
 ![中文字重对照](assets/cjk-weight-comparison.png)
-
-**Signature 衬线重绘对照**：`cjk` 与 `signature` 两版同文，末节并列六个字的末端特写；西文字形两版逐字节相同。
-
-![Signature 衬线重绘对照](assets/signature-comparison.png)
 
 **假名预览**：五十音、浊音拗音、带圈方块符号与日文样句。
 
@@ -155,7 +149,7 @@ body {
 
 ## 构建原理
 
-脚本分十步：读取基座并记录字形顺序与垂直度量 → 按预设筛选来源码位 → CFF 三次曲线用 `cu2qu` 转二次并缩放 2000 UPM → Noto Serif 可变字体实例化到 `wght=500` → 展开复合字形并缩放 → 设定中文全宽与其余字形的推进宽度 → **`signature` 专属：按实测设计 DNA 重绘中文末端、对齐应力轴** → **只追加**新字形 → 更新四张 cmap 子表并生成 format 12 → 重算 `maxp`/`hhea`/`head`/`OS/2` 与 `name` 表。
+脚本分九步：读取基座并记录字形顺序与垂直度量 → 按预设筛选来源码位 → CFF 三次曲线用 `cu2qu` 转二次并缩放 2000 UPM → Noto Serif 可变字体实例化到 `wght=500` → 展开复合字形并缩放 → 设定中文全宽与其余字形的推进宽度 → **只追加**新字形 → 更新四张 cmap 子表并生成 format 12 → 重算 `maxp`/`hhea`/`head`/`OS/2` 与 `name` 表。
 
 「只追加」是关键：原有 720 个 glyph id 全部保持有效，所以不需要重写任何 GSUB/GPOS 查找表。`full` 模式会取 CJK 来源里所有尚未覆盖的码位，但排除集用的是 LGC 来源**实际**的 cmap，而不是名义 Unicode 范围——像 U+2160 罗马数字一这类 Noto Serif 没有、思源宋体却有的字符，才不会被误排除而留下缺口。
 
@@ -168,8 +162,7 @@ body {
 | 文档 | 内容 |
 | --- | --- |
 | [docs/COMPLIANCE.md](docs/COMPLIANCE.md) | 为什么不含二进制、上游授权、OFL 义务、商标与再分发自查 |
-| [docs/DESIGN.md](docs/DESIGN.md) | Signature 设计日志：实测数据、被推翻的假设、否决路径与未达成目标 |
-| [docs/BUILD.md](docs/BUILD.md) | 依赖、目录布局、五档构建命令、参数表、字重实测、验证与改名 |
+| [docs/BUILD.md](docs/BUILD.md) | 依赖、目录布局、四档构建命令、参数表、字重实测、验证与改名 |
 | [docs/CHARACTER-SET.md](docs/CHARACTER-SET.md) | 按 Unicode 分区的逐段覆盖明细与刻意不收录的范围 |
 | [docs/USAGE.md](docs/USAGE.md) | 安装、CSS、多语言示例、OpenType 特性、子集化、渲染注意事项 |
 | [FONTLOG.txt](FONTLOG.txt) | 逐项修改记录与版本历史，遵循 OFL 惯例 |
@@ -182,14 +175,11 @@ body {
 ```
 .
 ├── scripts/
-│   ├── build_cjk.py      构建脚本，五档预设
-│   ├── measure_dna.py    从西文实测设计 DNA
-│   ├── harmonize.py      按 DNA 重绘中文衬线
+│   ├── build_cjk.py      构建脚本，四档预设
 │   ├── make_woff2.py     TTF 转 WOFF2
-│   ├── verify.py         产物结构与字符覆盖校验
-│   └── make_signature_sheet.py  生成本地样张对照图
-├── docs/                 合规、设计、构建、字符集、使用五篇文档
-├── assets/               七张样张图 + design-dna.json / harmony-report.json（均不含字体软件）
+│   └── verify.py         产物结构与字符覆盖校验
+├── docs/                 合规、构建、字符集、使用四篇文档
+├── assets/               六张样张图（图片不含字体软件）
 ├── inputs/               本地放上游字体，被 .gitignore 排除
 ├── build/                本地产物，被 .gitignore 排除
 ├── README.md             本文件
@@ -209,7 +199,7 @@ body {
 
 ## 贡献与维护
 
-欢迎提交缺字报告、构建脚本改进、设计规则修正与样张优化，流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。两条红线：任何 PR 都**不得**提交字体二进制、上游字体文件或凭证；涉及新增轮廓来源的改动必须写明来源与许可。仓库由 [Moirania](https://github.com/Moirania) 维护。
+欢迎提交缺字报告、构建脚本改进、文档修正与样张优化，流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。两条红线：任何 PR 都**不得**提交字体二进制、上游字体文件或凭证；涉及新增轮廓来源的改动必须写明来源与许可。仓库由 [Moirania](https://github.com/Moirania) 维护。
 
 ## 许可证
 

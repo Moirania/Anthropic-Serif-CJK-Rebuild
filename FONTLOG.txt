@@ -12,11 +12,6 @@ font that the scripts generate locally from the reader's own inputs.
 Version history
 ---------------
 
-  1.300  2026-11-24  Signature edition. Added a fifth build preset that
-                      measures the Latin design grammar and redraws CJK
-                      stroke terminals accordingly. See the section
-                      "Version 1.300 Signature" below.
-
   1.000  2026-11-19  Rebuild edition. A fresh, source-only publication of
                       the same extension method, with four build presets
                       (cjk, cjk-bold, multilingual, full), a neutral
@@ -81,12 +76,11 @@ Modifications
   "SerifCJKExtension-Regular". This removes the upstream brand name from
   the derivative. --keep-upstream-name reproduces the original naming.
 
-- Provided five presets with distinct version strings:
+- Provided four presets with distinct version strings:
     cjk           31,724 glyphs / 31,595 code points  (Version 1.000)
     cjk-bold      31,724 glyphs / 31,595 code points  (Version 1.000 CJK Bold)
     multilingual  33,897 glyphs / 33,768 code points  (Version 1.100)
     full          47,092 glyphs / 46,963 code points  (Version 1.200)
-    signature     31,724 glyphs / 31,595 code points  (Version 1.300 Signature)
   The cjk and cjk-bold cmaps are identical; only outline instances
   differ. Ink density on a sample paragraph rises 21,178 -> 28,082 px
   (+32.6%) and the 中 stem 54.5 -> 70.7 px, while the Western H stem
@@ -96,47 +90,12 @@ Modifications
   without a reference binary, and scripts/make_woff2.py for local WOFF2
   conversion.
 
-- Produced seven specimen sheets in assets/ from locally built fonts:
+- Produced six specimen sheets in assets/ from locally built fonts:
   before-after.png, cjk-weight-comparison.png, kana-preview.png,
-  hangul-preview.png, multilingual-specimen.png, type-specimen-sheet.png,
-  signature-comparison.png.
+  hangul-preview.png, multilingual-specimen.png, type-specimen-sheet.png.
   Print-specimen style: hard 1px rules, crop marks, left alignment,
   generous margins, no rounded corners, no glass, no gradient buttons.
 
-
-Version 1.300 Signature
-------------------------
-
-Copyright (c) 2026 Moirania, for the changes listed below.
-
-Added scripts/measure_dna.py, which rasterises the Latin base at 1000 px
-em and writes assets/design-dna.json: H stem 107 px / crossbar 51 px
-(contrast 2.098), I bracketed serif head 299 px over a 107 px stem
-(2.794x, blending back within 14% of cap height), O stress 5 degrees
-from vertical, x-height/cap 0.75, CJK 83/29 px (contrast 2.862).
-
-Added scripts/harmonize.py, which reads that file and applies to CJK
-outlines only: a 5-degree stress shear (0.035) and a vertical flat serif
-head at x-extremum terminals on outer contours. The head is 99.5 units,
-derived from 2.794 x target horizontal thickness x 0.45 density factor.
-No horizontal extension is used. Contour-level edge emboldening was
-prototyped and removed: it twisted long horizontal edges into
-self-intersecting slants and caused FreeType raster overflow at >=800 px.
-
-The signature preset uses the Regular CJK source (wght 400) instead of
-Medium, because among all seven weights it has the stroke contrast
-closest to the Latin H without becoming too pale. Measured result:
-contrast 2.750 -> 2.273 (Latin target 2.098), sample ink 21,178 ->
-18,313 px (-13.5%). Western outlines remain byte-identical.
-
-Consistency: 30,925 of 31,004 glyphs fully rebuilt (99.75%), 2 passed
-through, 77 had no eligible terminal, 0 failures, 221,484 terminals,
-+8.5% contour points. Ten glyphs were rendered at 400/800/1000/1400 px
-with no overflow. assets/harmony-report.json records the distribution.
-
-Added assets/signature-comparison.png and docs/DESIGN.md, including the
-full experiment log, the three disproved assumptions, the rejected
-approaches and the limits listed below.
 
 Known limitations
 -----------------
@@ -159,14 +118,8 @@ Known limitations
   and subfamily Regular. It is not a synthetic bold face; applying CSS
   font-weight: 700 on top would embolden the Latin undesirably.
 
-- All five presets share the same family and subfamily names. Install
+- All four presets share the same family and subfamily names. Install
   only one; cjk and cjk-bold are indistinguishable to a font cache.
-
-- signature is a parameterised redraw, not a hand-drawn L3 typeface.
-  Triangular wedge slopes on dense glyphs are not fully removed, stroke
-  contrast stops at 2.273 rather than 2.098, counters and axes are not
-  adjusted per glyph, and no manual proofing of all 31,004 glyphs was
-  performed. See docs/DESIGN.md.
 
 - Colour emoji and pictographs are not included. The U+1F200 block
   contributes monochrome enclosed CJK ideographs only.

@@ -220,8 +220,6 @@ PRESETS = {
                          suffix="Multilingual", version="Version 1.100"),
     "full": dict(weight="Medium", lgc=True, full=True,
                  suffix="Full", version="Version 1.200"),
-    "signature": dict(weight="Regular", lgc=False, full=False, harmonize=True,
-                      suffix="Signature", version="Version 1.300 Signature"),
 }
 
 DEFAULT_FAMILY = "Serif CJK Extension"
@@ -258,12 +256,6 @@ def main():
     ap.add_argument("--full", action="store_true",
                     help="add every remaining CJK source code point: kana, "
                          "Hangul syllables/jamo and CJK symbols")
-    ap.add_argument("--harmonize", action="store_true",
-                    help="redraw CJK stroke terminals with the Latin design grammar")
-    ap.add_argument("--dna", default="assets/design-dna.json",
-                    help="measured design DNA (see scripts/measure_dna.py)")
-    ap.add_argument("--harmony-report", default="assets/harmony-report.json",
-                    help="where to write the consistency report")
     ap.add_argument("--limit", type=int, default=0,
                     help="convert only a small sample, for debugging")
     args = ap.parse_args()
@@ -273,8 +265,6 @@ def main():
         p = PRESETS[args.preset]
         args.full = p["full"]
         args.no_lgc = not p["lgc"]
-        if p.get("harmonize"):
-            args.harmonize = True
         if args.version_string is None:
             args.version_string = p["version"]
         if args.out is None:
@@ -325,7 +315,6 @@ def main():
         _ = glyf[name]  # force decoding of lazy glyph data
     used = set(orig_order)
     all_new, all_cps = [], {}
-    cjk_names = []
 
     # ---------------------------------------------------------------- CJK
     if not args.no_cjk and args.cjk_ttc:
@@ -362,7 +351,6 @@ def main():
         names, mapping, failed = add_cjk_glyphs(
             base, used, glyf, hmtx, cjk, scale, args.max_err, cjk_todo)
         print("CJK converted %d, failed %d %s" % (len(names), len(failed), failed[:5]))
-        cjk_names = list(names)
         all_new += names
         all_cps.update(mapping)
 
@@ -399,21 +387,6 @@ def main():
     if not all_new:
         sys.exit("no glyphs produced")
     print("total new glyphs: %d" % len(all_new))
-
-    # ---------------------------------------------------------- signature
-    if args.harmonize:
-        if not cjk_names:
-            sys.exit("--harmonize needs the CJK source")
-        if not os.path.isfile(args.dna):
-            sys.exit("design DNA not found: %s (run scripts/measure_dna.py first)" % args.dna)
-        try:
-            from harmonize import harmonize_font
-        except ImportError:
-            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-            from harmonize import harmonize_font
-        print("signature mode: redrawing CJK terminals from %s" % args.dna)
-        harmonize_font(base, cjk_names, args.dna, args.harmony_report)
-        print("Western outlines untouched: %d glyphs" % len(orig_order))
 
     # Append only: all original glyph ids stay valid, so GSUB/GPOS survive.
     base.setGlyphOrder(orig_order + all_new)
